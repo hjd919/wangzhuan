@@ -11,22 +11,23 @@ import indexStyles from 'styles/index';
 export default class Index extends React.Component {
   state = {
     data: ['', '', ''],
-    initialHeight: 176,
+    initialHeight: 150,
   }
   componentDidMount() {
+
+
     // simulate img loading
     setTimeout(() => {
       this.setState({
-        data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
+        data: ['https://img.wandu.cn/novel/cover/2017-09-18/1D588CBF9EB43C029BEF817ABDD05FC7.jpg', 'https://img.wandu.cn/novel/cover/2017-09-04/3C0E72047CC4DC94629FBB273D3C02CD.jpg'],
       });
     }, 100);
   }
   render() {
     const app = dva();
-
     app.model(exampleModel);
 
-    const hProp = this.state.initialHeight ? { height: this.state.initialHeight } : {};
+    const hProp = this.state.initialHeight ? { height: this.state.initialHeight,width: '100%' } : {};
 
     app.router(() => {
       return (
@@ -37,10 +38,10 @@ export default class Index extends React.Component {
             leftContent="万读"
             iconName={<img src="https://img.wandu.cn/novel/icon/20170808/181854_5989900ee6abc.png" style={{width:28,height:28}} alt="万读"/>}
             rightContent={[
-              <Link href={{ pathname: '/users', query: { name: 'Zeit' } }} passHref>
+              <Link key="1" href={{ pathname: '/users', query: { name: 'Zeit' } }} passHref>
                 <Button  type="default" size="small">注册</Button>
               </Link>,
-              <Link href={{ pathname: '/users', query: { name: 'Zeit' } }} passHref>
+              <Link key="2" href={{ pathname: '/users', query: { name: 'Zeit' } }} passHref>
                 <Button  type="default" size="small">登录</Button>
               </Link>
             ]}
@@ -73,13 +74,15 @@ export default class Index extends React.Component {
             beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
             afterChange={index => console.log('slide to', index)}
           >
-            {this.state.data.map(ii => (
-              <a href="http://www.baidu.com" key={ii} style={hProp}>
+            {this.state.data.map((ii,key) => (
+              <Link href="http://www.baidu.com">
+              <a key={key} style={hProp}>
                 <img
-                  src={`https://zos.alipayobjects.com/rmsportal/${ii}.png`}
+                  src={`${ii}`}
                   alt=""
                   onLoad={() => {
-                    // fire window resize event to change height
+                    console.log('aaa')
+                    // // fire window resize event to change height
                     // window.dispatchEvent(new Event('resize'));
                     // this.setState({
                     //   initialHeight: null,
@@ -87,6 +90,7 @@ export default class Index extends React.Component {
                   }}
                 />
               </a>
+              </Link>
             ))}
           </Carousel>
           {/*功能列表*/}
