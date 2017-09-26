@@ -41,8 +41,8 @@ export default class Index extends React.Component {
               <Link key="1" href={{ pathname: '/users', query: { name: 'Zeit' } }} passHref>
                 <Button  type="default" size="small">注册</Button>
               </Link>,
-              <Link key="2" href={{ pathname: '/users', query: { name: 'Zeit' } }} passHref>
-                <Button  type="default" size="small">登录</Button>
+              <Link key="2" href={{ pathname: '/my/login' }} passHref>
+                <Button type="default" size="small">登录</Button>
               </Link>
             ]}
           ></NavBar>
