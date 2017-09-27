@@ -10,6 +10,8 @@
         "styles": "./styles",
         "services": "./services",
         "models": "./models",
+        "utils": "./utils",
+        "configs": "./configs",
       }
     }]
   ]

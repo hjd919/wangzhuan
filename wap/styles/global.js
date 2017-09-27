@@ -45,4 +45,7 @@ ol, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, p, form, span, i, em, u, cite, small
     font-family: PingFangSC,sans-serif, "Microsoft YaHei", Arial, sans-self !important;
     font-weight: normal;
 }
+.am-flexbox .am-flexbox-item{
+    margin-left:0;
+}
 `

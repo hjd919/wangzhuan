@@ -1,13 +1,15 @@
 import {
-  getChannelList,
+  getIndexPage,
 } from 'services/indexService';
 
 export default {
 
-  namespace: 'example',
+  namespace: 'indexModel',
 
   state: {
-    test:'1234'
+    channels:[],
+    menus:[],
+    carousels: [],
   },
 
   subscriptions: {
@@ -19,15 +21,16 @@ export default {
   },
 
   effects: {
-    *getChannelList({ }, { call, put }) {  // eslint-disable-line
-      console.log('data')
-      const data = yield call(getChannelList)
-      console.log(data)
+    *getIndexPage({ }, { call, put }) {  // eslint-disable-line
+      const data = yield call(getIndexPage)
+      if (data.error_code == 0) {
+        yield put({ type: 'getIndexPageSuccess', payload:data.data})
+      }
     },
   },
 
   reducers: {
-    save(state, action) {
+    getIndexPageSuccess(state, action) {
       return { ...state, ...action.payload };
     },
   },
