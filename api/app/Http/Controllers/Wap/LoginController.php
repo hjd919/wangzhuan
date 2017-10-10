@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Controllers\Wap;
+namespace App\Http\Controllers\Wap;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserModel;
