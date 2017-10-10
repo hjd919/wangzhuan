@@ -1,6 +1,6 @@
 import {
-  getIndexPage,
-} from 'services/indexService';
+  loginByWechat,
+} from 'services/loginService';
 
 export default {
 
@@ -13,8 +13,8 @@ export default {
   },
 
   effects: {
-    *getIndexPage({ }, { call, put }) {  // eslint-disable-line
-      const data = yield call(getIndexPage)
+    *loginByWechat({ }, { call, put }) {  // eslint-disable-line
+      const data = yield call(loginByWechat)
       if (data.error_code == 0) {
         yield put({ type: 'getIndexPageSuccess', payload:data.data})
       }

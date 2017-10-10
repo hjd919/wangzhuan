@@ -17,7 +17,7 @@ function checkStatus(response) {
 }
 
 // 设置全路径
-function setFullUrl(url) {
+export function setFullUrl(url) {
   return config.apiUrl + url
 }
 

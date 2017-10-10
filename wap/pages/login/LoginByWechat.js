@@ -5,6 +5,8 @@ import React from 'react';
 
 import globalStyles from 'styles/globalStyles';
 
+import { setFullUrl } from 'utils/request';
+
 class LoginByWechat extends React.Component {
   constructor(props) {
     super(props)
@@ -12,7 +14,8 @@ class LoginByWechat extends React.Component {
     this.state = {}
   }
   toLogin(e) {
-    alert(111)
+    location.href=setFullUrl("login/wechat")+'?from='+encodeURIComponent(location.origin)
+    // dispatch({type:'loginModel/loginByWechat'})
   }
   render(){
     const { loginModel, form } = this.props
