@@ -30,7 +30,6 @@ body, div, form, img, p, h1, h2, h3, h4, h5, h6, span {
     font-size: 14px;
     line-height: 160%;
     font-family: "Helvetica Neue",Helvetica,STHeiTi,sans-serif, PingFangSC,"黑体", arial, PingFangSC-Regular, sans-serif;
-    color: #000;
 }
 ol, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, p, form, span, i, em, u, cite, small, table, img, div {
     border: medium none;
@@ -47,5 +46,11 @@ ol, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, p, form, span, i, em, u, cite, small
 }
 .am-flexbox .am-flexbox-item{
     margin-left:0;
+}
+
+/*reset*/
+.am-list-item .am-input-label{
+    color: #666;
+    font-size: 14px;
 }
 `

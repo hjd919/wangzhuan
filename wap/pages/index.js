@@ -4,22 +4,45 @@ import React from 'react';
 
 import Layout from 'components/Layout'
 import dva,{connect} from 'dva';
-import globalStyles from 'styles/global';
 import indexModel from 'models/indexModel';
-import indexStyles from 'styles/index';
+
+import globalStyles from 'styles/globalStyles';
+import indexStyles from 'styles/indexStyles';
 
 class Page extends React.Component {
-  state = {
-    data: ['', '', ''],
-    initialHeight: 150,
+  constructor(props) {
+    super(props);
+    console.log('constructor')
+  
+    this.state = {
+      initialHeight: null,
+    };
+  }
+  componentWillMount() {
+    console.log('componentWillMount')
   }
   componentDidMount() {
+    console.log('componentDidMount')
     // simulate img loading
     const {dispatch} = this.props
     dispatch({type:'indexModel/getIndexPage'});
   }
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps')
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate')
+    return true
+  }
+  componentWillUpdate(nextProps, nextState) {
+    console.log('componentWillUpdate')
+  }
+  componentWillUnmount() {
+    console.log('componentWillUnmount')
+  }
   render(){
     const hProp = this.state.initialHeight ? { height: this.state.initialHeight,width: '100%' } : {};
+    
     const {channels, menus, carousels} = this.props.indexModel
 
     return (
@@ -33,7 +56,7 @@ class Page extends React.Component {
             <Link key="1" href={{ pathname: '/users', query: { name: 'Zeit' } }} passHref>
               <Button  type="default" size="small">注册</Button>
             </Link>,
-            <Link key="2" href={{ pathname: '/my/login' }} passHref>
+            <Link key="2" href={{ pathname: '/login' }} passHref>
               <Button type="default" size="small">登录</Button>
             </Link>
           ]}
@@ -64,17 +87,10 @@ class Page extends React.Component {
         >
           {carousels.map((row,key) => (
             <Link key={key} href={row.href}>
-            <a style={hProp}>
+            <a>
               <img
                 src={row.image}
-                alt=""
-                onLoad={() => {
-                  // // fire window resize event to change height
-                  // window.dispatchEvent(new Event('resize'));
-                  // this.setState({
-                  //   initialHeight: null,
-                  // });
-                }}
+                alt={key}
               />
             </a>
             </Link>
@@ -107,9 +123,10 @@ class Page extends React.Component {
 }
 Page = connect(({indexModel}) => ({indexModel}))(Page);
 
+const app = dva();
+app.model(indexModel);
+
 export default () => {
-  const app = dva();
-  app.model(indexModel);
   app.router(() => <Page/>);
   const Component = app.start();
   return (

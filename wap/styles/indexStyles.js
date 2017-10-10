@@ -28,13 +28,8 @@ export default `
     height: 30px;
 }
 
-:global(.my-carousel a) {
-  display: inline-block;
-  width: 100%;
-  margin: 0; padding: 0;
-}
+
 :global(.my-carousel a img) {
   width: 100%;
-  vertical-align: top;
 }
 `
