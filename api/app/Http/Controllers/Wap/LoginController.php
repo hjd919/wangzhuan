@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Wap;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserModel;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -14,7 +14,7 @@ class LoginController extends Controller
         return Socialite::with('weixin')->stateless()->redirect();
     }
 
-    public function wechatCallback(UserModel $userModel)
+    public function wechatCallback(User $userModel)
     {
         $user = Socialite::with('weixin')->user();
         Log::info('用户信息' . var_export($user, true));
