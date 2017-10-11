@@ -14,7 +14,7 @@ class User extends Model
         return $this->where(['openid' => $openid])->first();
     }
 
-    public function create($userdata)
+    public function add($userdata)
     {
         return $this->create($userdata);
     }

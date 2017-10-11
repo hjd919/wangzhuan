@@ -17,12 +17,12 @@ class LoginController extends Controller
     public function wechatCallback(User $userModel)
     {
         $user = Socialite::with('weixin')->user();
-        Log::info('用户信息' . var_export($user, true));
+        // Log::info('用户信息' . var_export($user, true));
         if (empty($user) || empty($user->user)) {
             return response()->json(['授权失败,请重试']);
         }
         $userinfo = $user->user;
-        Log::info('用户信息1' . var_export($userinfo, true));
+        // Log::info('用户信息1' . var_export($userinfo, true));
 
         // 判断是否新用户
         $openid = $userinfo['openid'];
@@ -40,7 +40,8 @@ class LoginController extends Controller
                 'city'      => $userinfo['city'],
                 'avatar'    => $userinfo['headimgurl'],
             ];
-            $user = $userModel->create($userdata);
+            Log::info(var_export($userdata, true));
+            $user = $userModel->add($userdata);
             Log::info('新 $user');
             Log::info(var_export($user, true));
         } else {
