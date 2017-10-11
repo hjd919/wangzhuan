@@ -40,7 +40,7 @@ class LoginController extends Controller
                 'city'      => $userinfo['city'],
                 'avatar'    => $userinfo['headimgurl'],
             ];
-            Log::info(var_export($userdata, true));
+            // Log::info(var_export($userdata, true));
             $user = $userModel->add($userdata);
             Log::info('新 $user');
             Log::info(var_export($user, true));
