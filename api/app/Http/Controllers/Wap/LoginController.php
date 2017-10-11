@@ -41,7 +41,7 @@ class LoginController extends Controller
                 'avatar'    => $userinfo['headimgurl'],
             ];
             Log::info(var_export($userdata, true));
-            $user = $userModel->add($userdata);
+            $user = User::create($userdata);
             Log::info('新 $user');
             Log::info(var_export($user, true));
         } else {
