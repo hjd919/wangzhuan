@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Wap;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Auth;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -41,24 +42,31 @@ class LoginController extends Controller
                 'avatar'    => $userinfo['headimgurl'],
             ];
             $user = $userModel->createUser($userdata);
-            Log::info('新 $user');
-            Log::info(var_export($user, true));
+            // Log::info('新 $user');
+            // Log::info(var_export($user, true));
         } else {
-            Log::info('旧 $user');
-            Log::info(var_export($user, true));
+            // Log::info('旧 $user');
+            // Log::info(var_export($user, true));
         }
 
         // 登录
         $token           = str_random(60);
         $user->api_token = $token;
         $res             = $user->save();
-        Log::info('登录-保存token:' . var_export($res, true));
+        // Log::info('登录-保存token:' . var_export($res, true));
 
-        $redirect_url = 'http://slsw.yz210.com?token=' . $token;
-        Log::info('登录-跳转地址:' . $redirect_url);
+        $redirect_url = 'http://slsw.yz210.com?api_token=' . $token;
+        // Log::info('登录-跳转地址:' . $redirect_url);
         // $token = JWTAuth::fromUser($user);
 
         // 跳转到首页 - 192.168.230.xxx
         return redirect($redirect_url);
+    }
+
+    public function info()
+    {
+        $user = Auth::user();
+        Log::info('userinfo:' . var_export($user, true));
+        return $user;
     }
 }
