@@ -16,6 +16,6 @@ class User extends Model
 
     public function add($userdata)
     {
-        return $this->create($userdata);
+        return self::create($userdata);
     }
 }
