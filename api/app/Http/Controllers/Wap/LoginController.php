@@ -31,7 +31,6 @@ class LoginController extends Controller
             Log::info('新用户，添加用户');
 
             // 新用户，添加用户
-            $userinfo = $user->user;
             $userdata = [
                 'user_name' => $userinfo['nickname'],
                 'nickname'  => $userinfo['nickname'],
