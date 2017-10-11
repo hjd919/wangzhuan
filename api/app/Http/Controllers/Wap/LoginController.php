@@ -40,21 +40,25 @@ class LoginController extends Controller
                 'city'      => $userinfo['city'],
                 'avatar'    => $userinfo['headimgurl'],
             ];
-            Log::info(var_export($userdata, true));
-            $user = User::create($userdata);
+            $user = $userModel->createUser($userdata);
             Log::info('新 $user');
             Log::info(var_export($user, true));
         } else {
             Log::info('旧 $user');
             Log::info(var_export($user, true));
         }
-        Log::info('server-get');
-        Log::info(var_export($_GET, true));
-        return '';
+
         // 登录
+        $token           = str_random(60);
+        $user->api_token = $token;
+        $res             = $user->save();
+        Log::info('登录-保存token:' . var_export($res, true));
+
+        $redirect_url = 'http://slsw.yz210.com?token=' . $token;
+        Log::info('登录-跳转地址:' . $redirect_url);
         // $token = JWTAuth::fromUser($user);
 
         // 跳转到首页 - 192.168.230.xxx
-        // return redirect('http://192.168.230.230:3000?token=' . $token);
+        return redirect($redirect_url);
     }
 }

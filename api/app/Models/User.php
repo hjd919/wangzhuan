@@ -2,21 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 
-class User extends Model
+class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    protected $fillable = ['*'];
+    use Authenticatable, Authorizable;
+
+    protected $guarded = [];
 
     public function isNew($openid)
     {
         return $this->where(['openid' => $openid])->first();
     }
 
-    public function add($userdata)
+    public function createUser($userdata)
     {
-        Log::info(var_export($userdata, true));
-        return self::create($userdata);
+        return $this->create($userdata);
     }
 }

@@ -14,4 +14,8 @@ $router->group(['middleware' => [], 'namespace' => 'Wap', 'prefix' => 'wap'], fu
     $router->get('/index/get', 'IndexController@get');
     $router->get('/login/wechat', 'LoginController@wechat');
     $router->get('/login/wechat/callback', 'LoginController@wechatCallback');
+
+    $router->group(['middleware' => ['auth']], function () use ($router) {
+        $router->get('/user/info', 'LoginController@info');
+    });
 });
