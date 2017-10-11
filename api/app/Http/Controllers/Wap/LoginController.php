@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Wap;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserModel;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
