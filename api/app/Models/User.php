@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class User extends Model
 {
-    public $timestamps  = false;
     protected $fillable = ['*'];
 
     public function isNew($openid)
@@ -16,6 +16,7 @@ class User extends Model
 
     public function add($userdata)
     {
+        Log::info(var_export($userdata, true));
         return self::create($userdata);
     }
 }
