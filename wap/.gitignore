@@ -1,7 +1,5 @@
 # dependencies
 node_modules
 
-wap/configs/config.js
-
 # build output
 .next

@@ -1,3 +1,5 @@
+import querystring from 'querystring';
+
 export default {
 
   namespace: 'globalModel',
@@ -15,20 +17,22 @@ export default {
 
   reducers: {
     isLoggedIn(state, action) {
-      let isLoggedIn = action.payload.isLoggedIn
-      let api_token = action.payload.api_token
-      // 如果没有url的token，则判断本地是否存在有效token
-      if (!isLoggedIn){
+      const search = querystring.parse(action.payload.search.replace('?',''))
+      console.log(action.payload.search)
+      console.log(search)
+      let isLoggedIn,api_token
+      if(search.api_token){
+        isLoggedIn = localStorage.isLoggedIn = true
+        api_token = localStorage.api_token = search.api_token  
+      }else{
         if(!localStorage.isLoggedIn){
+          // 如果本地也没有token，则判断为没登录
           isLoggedIn = false
           api_token = ''
         }else{
           isLoggedIn = localStorage.isLoggedIn
           api_token = localStorage.api_token
-        }
-      } else {
-        localStorage.isLoggedIn = isLoggedIn
-        localStorage.api_token = api_token        
+        }  
       }
 
       return { ...state, isLoggedIn, api_token };

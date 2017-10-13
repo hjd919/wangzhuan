@@ -1,0 +1,42 @@
+{
+  "entry": "src/index.js",
+  "env": {
+    "development": {
+      "extraBabelPlugins": [
+        "dva-hmr",
+        "styled-jsx/babel",
+        ["import", { "libraryName": "antd-mobile", "style": true }],
+        ["module-resolver", {
+          "root": ["./src"],
+          "alias": {
+            "components": "components",
+            "styles": "styles",
+            "services": "services",
+            "models": "models",
+            "utils": "utils",
+            "configs": "configs"
+          }
+        }],
+        "transform-runtime"
+      ]
+    },
+    "production": {
+      "extraBabelPlugins": [
+        "styled-jsx/babel",
+        ["import", { "libraryName": "antd-mobile", "style": true }],
+        ["module-resolver", {
+          "root": ["./src"],
+          "alias": {
+            "components": "components",
+            "styles": "styles",
+            "services": "services",
+            "models": "models",
+            "utils": "utils",
+            "configs": "configs"
+          }
+        }],
+        "transform-runtime"
+      ]
+    }
+  }
+}

@@ -1,49 +1,34 @@
 import { Button, Carousel, Flex, NavBar } from 'antd-mobile';
-import Link from 'next/link';
+import { connect } from 'dva';
 import React from 'react';
+import { Link } from 'dva/router';
 
-import Layout from 'components/Layout'
-import dva,{connect} from 'dva';
+import MainLayout from 'components/MainLayout/MainLayout';
 import globalModel from 'models/globalModel';
 import globalStyles from 'styles/globalStyles';
 import indexModel from 'models/indexModel';
 import indexStyles from 'styles/indexStyles';
-import url from 'url';
 import util from 'utils/util';
 
 class Page extends React.Component {
   constructor(props) {
     super(props);
 
-    const {dispatch} = props
-
+    const {dispatch, location} = props
+    console.log(location)
     this.state = {
       initialHeight: null,
-      isWeiXinBrowser: util.isWeiXinBrowser(props.userAgent)
+      isWeiXinBrowser: util.isWeiXinBrowser(navigator.userAgent)
     };
 
     // 获取页面数据
     dispatch({type:'indexModel/getIndexPage'});
   }
-  componentWillMount() {
-    console.log('componentWillMount')
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps')
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('shouldComponentUpdate')
-    return true
-  }
-  componentWillUpdate(nextProps, nextState) {
-    console.log('componentWillUpdate')
-  }
-  componentWillUnmount() {
-    console.log('componentWillUnmount')
-  }
+
   componentDidMount() {
-    const {dispatch,isLoggedIn,api_token} = this.props
-    dispatch({type:'globalModel/isLoggedIn', payload:{isLoggedIn,api_token}});
+    const {dispatch,location} = this.props
+    const search = location.search
+    dispatch({type:'globalModel/isLoggedIn', payload:{ search }});
   }
 
   render(){
@@ -55,23 +40,23 @@ class Page extends React.Component {
     // 导航条右边按钮组
     let rightContent = []
     if (isLoggedIn) {
-      rightContent.push(<Link key="1" href={{ pathname: '/my' }} passHref>
+      rightContent.push(<Link key="1" to={{ pathname: '/my' }}>
             <Button  type="default" size="small">我的</Button>
           </Link>)
     } else{
       // 没有登录
       if(!isWeiXinBrowser) {
-        rightContent.push(<Link key="1" href={{ pathname: '/register' }} passHref>
-            <Button  type="default" size="small">注册</Button>
+        rightContent.push(<Link key="1" to={{ pathname: '/register' }}>
+            <Button type="default" size="small">注册</Button>
           </Link>)
       }
-      rightContent.push(<Link key="2" href={{ pathname: '/login' }} passHref>
+      rightContent.push(<Link key="2" to={{ pathname: '/login' }}>
             <Button type="default" size="small">登录</Button>
           </Link>)
     }
 
     return (
-      <Layout>
+      <MainLayout>
         {/*top*/}
         <NavBar 
           mode="light"
@@ -85,9 +70,7 @@ class Page extends React.Component {
             channels.map((row,key) => {
               return (
                 <Flex.Item className="nav-item" key={key}>
-                  <Link href={row.href ? row.href : `/channel/${row.id}`}>
-                    <a className="nav-a">{row.channel_name}</a>
-                  </Link>
+                <Link to={row.href ? row.href : `/channel/${row.id}`} className="nav-a">{row.channel_name}</Link>
                 </Flex.Item>
                 )
             })
@@ -104,14 +87,12 @@ class Page extends React.Component {
           afterChange={index => console.log('slide to', index)}
         >
           {carousels.map((row,key) => (
-            <Link key={key} href={row.href}>
-            <a>
+            <a href={row.href} key={key}>
               <img
                 src={row.image}
                 alt={key}
               />
             </a>
-            </Link>
           ))}
         </Carousel>
         {/*功能列表*/}
@@ -120,14 +101,12 @@ class Page extends React.Component {
             menus.map((row,key) => {
               return (
               <Flex.Item key={key}>
-                <Link href={row.href}>
-                  <a className="">
+                  <a className="" href={row.href}>
                     <p className="func-p">
                       <img className="func-img" src={row.icon}/>
                     </p>
                     <p className="func-p">{row.menu_name}</p>
                   </a>
-                </Link>
               </Flex.Item>
               )            
             })
@@ -135,45 +114,11 @@ class Page extends React.Component {
         </Flex>
         <style jsx>{indexStyles}</style>
         <style jsx global>{globalStyles}</style>
-      </Layout>
+      </MainLayout>
     );
   }
 }
 
 
-Page = connect(({indexModel,globalModel}) => ({indexModel,globalModel}))(Page);
+export default connect(({indexModel,globalModel}) => ({indexModel,globalModel}))(Page);
 
-const IndexPage = (props) => {
-  let app = dva();
-  app = util.registerModel(app,indexModel)
-  app = util.registerModel(app,globalModel)
-  app.router(() => <Page {...props}/>);
-  const Component = app.start();
-  return (
-    <Component />
-  );
-}
-IndexPage.getInitialProps = async ({ req }) => {
-  const initProps = {
-    api_token: '',
-    isLoggedIn: false,
-  }
-  if(req){
-    // 判断是否登录
-    var urlParse = url.parse(req.url, true);
-    if(urlParse.query.api_token){
-      initProps.isLoggedIn = true
-      initProps.api_token = urlParse.query.api_token
-    }
-
-    // ua
-    initProps.userAgent = req.headers['user-agent']
-  } else {
-    // ua
-    initProps.userAgent = navigator.userAgent
-  }
-
-  return initProps
-}
-
-export default IndexPage

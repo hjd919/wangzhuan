@@ -70,7 +70,7 @@ Page = connect(({loginModel}) => ({loginModel}))(Page);
 // }
 
 const app = dva();
-app.model(loginModel);
+app = util.registerModel(app,globalModel)
 
 const LoginPage = (props) => {
   app.router(() => <Page {...props}/>);
