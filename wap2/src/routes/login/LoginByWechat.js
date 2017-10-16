@@ -34,6 +34,7 @@ class LoginByWechat extends React.Component {
             .image1{
               width:40px;
               height:40px;
+            }
           `}</style>
           <style jsx global>{globalStyles}</style>
         </div>
