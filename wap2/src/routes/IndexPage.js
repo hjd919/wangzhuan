@@ -1,12 +1,10 @@
 import { Button, Carousel, Flex, NavBar } from 'antd-mobile';
+import { Link } from 'dva/router';
 import { connect } from 'dva';
 import React from 'react';
-import { Link } from 'dva/router';
 
 import MainLayout from 'components/MainLayout/MainLayout';
-import globalModel from 'models/globalModel';
 import globalStyles from 'styles/globalStyles';
-import indexModel from 'models/indexModel';
 import indexStyles from 'styles/indexStyles';
 import util from 'utils/util';
 
@@ -14,28 +12,28 @@ class Page extends React.Component {
   constructor(props) {
     super(props);
 
-    const {dispatch, location} = props
-    console.log(location)
     this.state = {
       initialHeight: null,
       isWeiXinBrowser: util.isWeiXinBrowser(navigator.userAgent)
     };
 
+    const {dispatch, location} = props
     // 获取页面数据
     dispatch({type:'indexModel/getIndexPage'});
   }
 
   componentDidMount() {
+    console.log('index-componentDidMount')
     const {dispatch,location} = this.props
     const search = location.search
-    dispatch({type:'globalModel/isLoggedIn', payload:{ search }});
+    dispatch({type:'loginModel/isLoggedIn', payload:{ search }});
   }
 
   render(){
     const hProp = this.state.initialHeight ? { height: this.state.initialHeight,width: '100%' } : {};
 
     const {channels, menus, carousels} = this.props.indexModel
-    const {isLoggedIn} = this.props.globalModel
+    const {isLoggedIn} = this.props.loginModel
     const {isWeiXinBrowser} = this.state
     // 导航条右边按钮组
     let rightContent = []
@@ -120,5 +118,5 @@ class Page extends React.Component {
 }
 
 
-export default connect(({indexModel,globalModel}) => ({indexModel,globalModel}))(Page);
+export default connect(({indexModel,loginModel}) => ({indexModel,loginModel}))(Page);
 

@@ -8,7 +8,7 @@ function RouterConfig({ history, app }) {
     app,
     models: () => [
       import('./models/indexModel'),
-      import('./models/globalModel'),
+      import('./models/loginModel'),
     ],
     component: () => import('./routes/IndexPage'),
   });
@@ -22,11 +22,21 @@ function RouterConfig({ history, app }) {
     component: () => import('./routes/LoginPage'),
   });
 
+  // 我的
+  const MyPage = dynamic({
+    app,
+    models: () => [
+      import('./models/myModel'),
+    ],
+    component: () => import('./routes/MyPage'),
+  });
+
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={IndexPage} />
         <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/my" component={MyPage} />
       </Switch>
     </Router>
   );

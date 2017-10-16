@@ -1,4 +1,5 @@
 import { Button, InputItem, List, WhiteSpace, WingBlank } from 'antd-mobile';
+import { connect } from 'dva';
 import { createForm } from 'rc-form';
 import React from 'react';
 
@@ -12,14 +13,19 @@ class LoginByPhone extends React.Component {
     this.state = {}
 
     this.getCode = this.getCode.bind(this)
+    this.login = this.login.bind(this)
   }
   componentDidMount() {
   }
   getCode(){
     console.log(1)
   }
+  login(){
+    const { dispatch } = this.props
+    dispatch({type:'loginModel/loginByPhone',payload:{'phone':1234}});
+  }
   render(){
-    const { loginModel, form } = this.props
+    const { form } = this.props
     const { getFieldProps } = form;
 
     return (
@@ -44,7 +50,7 @@ class LoginByPhone extends React.Component {
           <WhiteSpace />
           <WhiteSpace />
           <WingBlank>
-            <Button type="primary" disabled>登录</Button>
+            <Button type="primary" onClick={this.login}>登录</Button>
           </WingBlank>
           <style jsx>{loginStyles}</style>
           <style jsx global>{globalStyles}</style>
@@ -52,4 +58,4 @@ class LoginByPhone extends React.Component {
     );
   }
 }
-export default createForm()(LoginByPhone)
+export default connect(({loginModel}) => ({loginModel}))(createForm()(LoginByPhone))

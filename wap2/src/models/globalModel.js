@@ -18,8 +18,6 @@ export default {
   reducers: {
     isLoggedIn(state, action) {
       const search = querystring.parse(action.payload.search.replace('?',''))
-      console.log(action.payload.search)
-      console.log(search)
       let isLoggedIn,api_token
       if(search.api_token){
         isLoggedIn = localStorage.isLoggedIn = true

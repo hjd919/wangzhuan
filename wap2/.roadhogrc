@@ -4,7 +4,10 @@
     "development": {
       "extraBabelPlugins": [
         "dva-hmr",
-        "styled-jsx/babel",
+        [
+          "styled-jsx/babel",
+          { "plugins": ["styled-jsx-plugin-postcss"] }
+        ],
         ["import", { "libraryName": "antd-mobile", "style": true }],
         ["module-resolver", {
           "root": ["./src"],
@@ -22,7 +25,10 @@
     },
     "production": {
       "extraBabelPlugins": [
-        "styled-jsx/babel",
+        [
+          "styled-jsx/babel",
+          { "plugins": ["styled-jsx-plugin-postcss"] }
+        ],
         ["import", { "libraryName": "antd-mobile", "style": true }],
         ["module-resolver", {
           "root": ["./src"],

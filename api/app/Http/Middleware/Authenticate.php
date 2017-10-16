@@ -36,6 +36,11 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
+            header("Content-type: application/json; charset=utf-8");
+            header("Access-Control-Allow-Origin: *");
+            header("Access-Control-Allow-Methods: POST, GET");
+            header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
+            header("Access-Control-Max-Age: 20");
             return response('Unauthorized.', 401);
         }
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Wap;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Auth;
+use App\Support\Util;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -63,10 +63,10 @@ class LoginController extends Controller
         return redirect($redirect_url);
     }
 
-    public function info()
+    public function phone()
     {
-        $user = Auth::user();
-        Log::info('userinfo:' . var_export($user, true));
-        return $user;
+        $user      = User::find(11);
+        $api_token = $user->api_token;
+        Util::die_json(compact('api_token'));
     }
 }
