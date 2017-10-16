@@ -31,12 +31,22 @@ function RouterConfig({ history, app }) {
     component: () => import('./routes/MyPage'),
   });
 
+  // 帮助
+  const HelpPage = dynamic({
+    app,
+    models: () => [
+      import('./models/helpModel'),
+    ],
+    component: () => import('./routes/HelpPage'),
+  });
+
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={IndexPage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/my" component={MyPage} />
+        <Route exact path="/help" component={HelpPage} />
       </Switch>
     </Router>
   );

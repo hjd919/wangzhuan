@@ -64,14 +64,15 @@ class Page extends React.Component {
   			</div>
 			<div className="gap"></div>
 		 	<List className="my-list">
-		        <Item arrow="horizontal" multipleLine>
-		          Title
+		        <Item arrow="horizontal">
+			        <Link to="/help">
+			          使用帮助
+			        </Link>
 		        </Item>
-		        <Item
-		          arrow="horizontal"
-		          onClick={() => {}}
-		        >
-		          ListItem
+		        <Item arrow="horizontal">
+			        <Link to="/feedback">
+			          反馈建议
+			        </Link>
 		        </Item>
 		    </List>
 	    	<style jsx>{`
