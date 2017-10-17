@@ -1,4 +1,5 @@
 import { Accordion, Button, List } from 'antd-mobile';
+import { routerRedux} from 'dva/router';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -13,7 +14,6 @@ import globalStyles from 'styles/globalStyles';
 class Page extends React.Component {
 	constructor(props) {
 	    super(props)
-
 	    const {dispatch} = props
 	    // 获取页面数据
 	    dispatch({type:'helpModel/getUserinfo'});
@@ -25,7 +25,7 @@ class Page extends React.Component {
   	return (
       	<MainLayout>
 	        <Header 
-	        leftContent={<Link key="1" to={{ pathname: '/my' }}>返回</Link>}
+	        leftContent={<Link key="1" to="/my">返回</Link>}
 	        rightContent={[
 	          <Link key="1" to={{ pathname: '/' }}>
 	            <Button type="default" size="small">首页</Button>

@@ -25,4 +25,11 @@ class IndexController extends Controller
 
         Util::die_json(compact('channels', 'menus', 'carousels'));
     }
+
+    public function submitFeedback(
+        Request $request
+    ) {
+        $a = $request->all();
+        print_r($a);
+    }
 }

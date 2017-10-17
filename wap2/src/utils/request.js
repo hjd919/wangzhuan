@@ -23,6 +23,10 @@ export function setFullUrl(url) {
   return config.apiUrl + url
 }
 
+export function requestAuth(url, options={}) {
+  return request(url, options, 'isAuth')
+}
+
 /**
  * Requests a URL, returning a promise.
  *

@@ -1,4 +1,4 @@
-import { Router, Route, Switch } from 'dva/router';
+import { Router, Route, Switch, Redirect } from 'dva/router';
 import React from 'react';
 import dynamic from 'dva/dynamic';
 
@@ -40,13 +40,24 @@ function RouterConfig({ history, app }) {
     component: () => import('./routes/HelpPage'),
   });
 
+  // 反馈
+  const FeedbackPage = dynamic({
+    app,
+    models: () => [
+      import('./models/feedbackModel'),
+    ],
+    component: () => import('./routes/FeedbackPage'),
+  });
+
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={IndexPage} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/my" component={MyPage} />
-        <Route exact path="/help" component={HelpPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/my" component={MyPage} />
+        <Route path="/help" component={HelpPage} />
+        <Route path="/feedback" component={FeedbackPage} />
+        <Redirect to="/" />
       </Switch>
     </Router>
   );
