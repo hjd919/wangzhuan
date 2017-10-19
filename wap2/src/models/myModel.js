@@ -18,7 +18,6 @@ export default {
   effects: {
     *getUserinfo({ payload }, { call, put }) {  // eslint-disable-line
       const data = yield call(getUserinfo)
-      console.log(data)
       if (data.error_code == 0) {
         yield put({ type: 'getUserinfoSuccess', payload:data.data})
       }

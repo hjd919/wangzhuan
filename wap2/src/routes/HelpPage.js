@@ -1,5 +1,4 @@
 import { Accordion, Button, List } from 'antd-mobile';
-import { routerRedux} from 'dva/router';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -9,7 +8,7 @@ import React from 'react';
 
 import Header from 'components/MainLayout/Header';
 import MainLayout from 'components/MainLayout/MainLayout';
-import globalStyles from 'styles/globalStyles';
+// import globalStyles from 'styles/globalStyles';
 
 class Page extends React.Component {
 	constructor(props) {
@@ -45,9 +44,6 @@ class Page extends React.Component {
 	            Text text text text text text text text text text text text text text text
 	          </Accordion.Panel>
 	        </Accordion>
-	    	<style jsx>{`
-	    	`}</style>
-	    	<style jsx global>{globalStyles}</style>
   		</MainLayout>
   	)
   }

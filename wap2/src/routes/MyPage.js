@@ -10,12 +10,10 @@ import MainLayout from 'components/MainLayout/MainLayout';
 import globalStyles from 'styles/globalStyles';
 
 class Page extends React.Component {
-	constructor(props) {
-	    super(props)
-
-	    const {dispatch} = props
+  	componentWillMount() {
+	    const {dispatch} = this.props
 	    // 获取页面数据
-	    dispatch({type:'myModel/getUserinfo'});
+	    dispatch({type:'myModel/getUserinfo'});		
   	}
 
   render(){
@@ -191,7 +189,6 @@ class Page extends React.Component {
 			    text-overflow: ellipsis;
 	    	  }
 	    	`}</style>
-	    	<style jsx global>{globalStyles}</style>
   		</MainLayout>
   	)
   }

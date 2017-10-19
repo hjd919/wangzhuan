@@ -43,9 +43,6 @@ class Page extends React.Component {
 	        <WingBlank>
         		<Button type="primary" onClick={this.submit}>提 交</Button>
         	</WingBlank>
-	    	<style jsx>{`
-	    	`}</style>
-	    	<style jsx global>{globalStyles}</style>
   		</MainLayout>
   	)
   }

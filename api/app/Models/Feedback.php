@@ -4,13 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Channel extends Model
+class Feedback extends Model
 {
+    public $table      = 'feedbacks';
     public $timestamps = false;
     protected $guarded = [];
-
-    public function getList()
-    {
-        return $this->get();
-    }
 }
