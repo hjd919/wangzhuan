@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ceb67654000f662a1fd0f7a7a5b634ec",
-    "content-hash": "1ecd72c370011bac1549d798351209e2",
+    "hash": "de7d21b55d9cc65b198891c768c7db14",
+    "content-hash": "a9d63e36339b192dabb294a9f83727f1",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -2658,6 +2658,49 @@
                 "environment"
             ],
             "time": "2016-09-01 10:05:43"
+        },
+        {
+            "name": "xiaosier/libweibo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xiaosier/libweibo.git",
+                "reference": "d85d8fdd0b44731bce4ceab747b75d20bf8a12fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/xiaosier/libweibo/d85d8fdd0b44731bce4ceab747b75d20bf8a12fc.zip",
+                "reference": "d85d8fdd0b44731bce4ceab747b75d20bf8a12fc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "saetv2.ex.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "lazypeople",
+                    "email": "hfutming@gmail.com",
+                    "homepage": "http://lazy.changes.com.cn",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP sdk for Weibo open platform",
+            "homepage": "http://github.com/xiaosier/libweibo",
+            "keywords": [
+                "sdk",
+                "weibo"
+            ],
+            "time": "2017-07-14 12:15:43"
         }
     ],
     "packages-dev": [
@@ -4273,7 +4316,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "xiaosier/libweibo": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

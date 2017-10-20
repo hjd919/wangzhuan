@@ -10,7 +10,8 @@
         "vlucas/phpdotenv": "~2.2",
         "laravel/socialite": "^3.0",
         "socialiteproviders/weixin": "^4.0",
-        "socialiteproviders/weibo": "^3.0"
+        "socialiteproviders/weibo": "^3.0",
+        "xiaosier/libweibo": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
