@@ -12,7 +12,16 @@ class LoginController extends Controller
 {
     public function weibo()
     {
-        return Socialite::with('weixin')->stateless()->redirect();
+        return Socialite::with('weibo')->stateless()->redirect();
+    }
+
+    public function weiboCallback(User $userModel)
+    {
+        $user = Socialite::with('weibo')->user();
+        Log::info(var_export($user, true));
+
+        // 跳转到首页 - 192.168.230.xxx
+        return redirect($redirect_url);
     }
 
     // 微信登录
