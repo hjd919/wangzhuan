@@ -1,0 +1,32 @@
+// Fonts
+// @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+// Variables
+@import "variables";
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+// app
+.form-group > label.require::after {
+    content: "*";
+    font-size: 19px;
+    color: red;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.clearfix:after {
+    content: "020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.pagination-wrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

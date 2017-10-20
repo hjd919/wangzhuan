@@ -10,6 +10,12 @@ use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
+    public function weibo()
+    {
+        return Socialite::with('weixin')->stateless()->redirect();
+    }
+
+    // 微信登录
     public function wechat()
     {
         return Socialite::with('weixin')->stateless()->redirect();

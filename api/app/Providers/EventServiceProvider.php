@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            // add your listeners (aka providers) here
             'SocialiteProviders\Weixin\WeixinExtendSocialite@handle',
+            'SocialiteProviders\Weibo\WeiboExtendSocialite@handle',
         ],
     ];
 
