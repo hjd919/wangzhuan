@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class WeiboController extends Controller
 {
-    public function getUserinfo(
+    public function share(
         User $userModel,
         Request $request
     ) {

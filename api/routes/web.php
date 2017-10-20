@@ -17,6 +17,8 @@ $router->group(['middleware' => [], 'namespace' => 'Wap', 'prefix' => 'wap'], fu
     $router->get('/login/weibo', 'LoginController@weibo');
     $router->get('/login/weiboCallback', 'LoginController@weiboCallback');
 
+    $router->get('/weibo/share', 'WeiboController@share');
+
     $router->get('/login/phone', 'LoginController@phone');
 
     $router->group(['middleware' => ['auth']], function () use ($router) {
