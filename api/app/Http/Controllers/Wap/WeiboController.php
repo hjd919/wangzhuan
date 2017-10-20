@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+require "../vendor/xiaosier/libweibo/saetv2.ex.class.php";
+
 class WeiboController extends Controller
 {
     public function share(
