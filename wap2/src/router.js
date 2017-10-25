@@ -49,6 +49,16 @@ function RouterConfig({ history, app }) {
     component: () => import('./routes/FeedbackPage'),
   });
 
+  // 设置
+  const SettingPage = dynamic({
+    app,
+    models: () => [
+      import('./models/settingModel'),
+      import('./models/loginModel'),
+    ],
+    component: () => import('./routes/SettingPage'),
+  });
+
   return (
     <Router history={history}>
       <Switch>
@@ -57,6 +67,7 @@ function RouterConfig({ history, app }) {
         <Route path="/my" component={MyPage} />
         <Route path="/help" component={HelpPage} />
         <Route path="/feedback" component={FeedbackPage} />
+        <Route path="/setting" component={SettingPage} />
         <Redirect to="/" />
       </Switch>
     </Router>

@@ -10,8 +10,6 @@ class LoginByWechat extends React.Component {
     super(props)
 
     this.state = {}
-
-    this.toLogin = this.toLogin.bind(this)
   }
   toLogin(e) {
     location.href=setFullUrl("login/wechat")+'?from='+encodeURIComponent(location.origin)
@@ -26,7 +24,7 @@ class LoginByWechat extends React.Component {
           <WhiteSpace />
           <WhiteSpace />
           <WingBlank>
-            <Button type="primary" onClick={this.toLogin}>微信登录</Button>
+            <Button type="primary" onClick={this.toLogin.bind(this)}>微信登录</Button>
           <WhiteSpace />
             <Button type="default">手机号快捷登录</Button>
           </WingBlank>

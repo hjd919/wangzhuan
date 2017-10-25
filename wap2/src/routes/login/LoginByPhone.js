@@ -2,27 +2,22 @@ import { Button, InputItem, List, WhiteSpace, WingBlank } from 'antd-mobile';
 import { connect } from 'dva';
 import { createForm } from 'rc-form';
 import React from 'react';
+import { routerRedux } from 'dva/router';
 
 import globalStyles from 'styles/globalStyles';
 import loginStyles from 'styles/loginStyles';
 
 class LoginByPhone extends React.Component {
-  constructor(props) {
-    super(props)
 
-    this.state = {}
-
-    this.getCode = this.getCode.bind(this)
-    this.login = this.login.bind(this)
-  }
-  componentDidMount() {
-  }
   getCode(){
     console.log(1)
   }
   login(){
     const { dispatch } = this.props
-    dispatch({type:'loginModel/loginByPhone',payload:{'phone':1234}});
+    dispatch({type:'loginModel/loginByPhone',payload:{'phone':1234}})
+      .then(()=>{
+        dispatch(routerRedux.push('/'))
+      })
   }
   render(){
     const { form } = this.props
@@ -44,13 +39,13 @@ class LoginByPhone extends React.Component {
                 type='number'
                 placeholder=""
               >验证码</InputItem>
-              <div className="code" onClick={this.getCode}>获取验证码</div>
+              <div className="code" onClick={this.getCode.bind(this)}>获取验证码</div>
             </div>
           </List>
           <WhiteSpace />
           <WhiteSpace />
           <WingBlank>
-            <Button type="primary" onClick={this.login}>登录</Button>
+            <Button type="primary" onClick={this.login.bind(this)}>登录</Button>
           </WingBlank>
           <style jsx>{loginStyles}</style>
           <style jsx global>{globalStyles}</style>

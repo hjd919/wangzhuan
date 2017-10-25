@@ -8,7 +8,9 @@ import globalStyles from 'styles/globalStyles';
 import indexStyles from 'styles/indexStyles';
 import util from 'utils/util';
 
-class Page extends React.Component {
+import Base from 'routes/Base';
+
+class Page extends Base {
   constructor(props) {
     super(props);
 
@@ -16,17 +18,16 @@ class Page extends React.Component {
       initialHeight: null,
       isWeiXinBrowser: util.isWeiXinBrowser(navigator.userAgent)
     };
-
-    const {dispatch, location} = props
-    // 获取页面数据
-    dispatch({type:'indexModel/getIndexPage'});
   }
 
   componentDidMount() {
-    console.log('index-componentDidMount')
-    const {dispatch,location} = this.props
-    const search = location.search
-    dispatch({type:'loginModel/isLoggedIn', payload:{ search }});
+    const {dispatch, location} = this.props
+    
+    // 获取页面数据
+    dispatch({type:'indexModel/getIndexPage'});
+
+    // 判断是否需要重定向
+    dispatch({type:'indexModel/isRedirect', payload:{search: location.search}});
   }
 
   render(){
@@ -36,21 +37,17 @@ class Page extends React.Component {
     const {isLoggedIn} = this.props.loginModel
     const {isWeiXinBrowser} = this.state
     // 导航条右边按钮组
-    let rightContent = []
+    let rightContent
     if (isLoggedIn) {
-      rightContent.push(<Link key="1" to={{ pathname: '/my' }}>
-            <Button  type="default" size="small">我的</Button>
-          </Link>)
+      rightContent = [<Button key="1" type="default" size="small" onClick={this.toPage.bind(this,'/my')}>我的</Button>]
     } else{
       // 没有登录
       if(!isWeiXinBrowser) {
-        rightContent.push(<Link key="1" to={{ pathname: '/register' }}>
-            <Button type="default" size="small">注册</Button>
-          </Link>)
+        rightContent = [
+          <Button key="1" type="default" onClick={this.toPage.bind(this, '/register')} size="small">注册</Button>,
+          <Button key="2" type="default" onClick={this.toPage.bind(this, '/login')} size="small">登录</Button>
+        ]
       }
-      rightContent.push(<Link key="2" to={{ pathname: '/login' }}>
-            <Button type="default" size="small">登录</Button>
-          </Link>)
     }
 
     return (

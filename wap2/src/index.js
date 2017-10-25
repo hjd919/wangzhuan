@@ -3,6 +3,7 @@ import './index.css';
 import createHistory from 'history/createBrowserHistory';
 // 1. Initialize
 const app = dva({
+	history: createHistory(),
 	onError(e, dispatch) {
 		console.log('global error')
     	console.log(e);

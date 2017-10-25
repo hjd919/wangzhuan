@@ -13,7 +13,9 @@ import Header from 'components/MainLayout/Header';
 import LoginByPhone from './login/LoginByPhone';
 import LoginByWechat from './login/LoginByWechat';
 
-class Page extends React.Component {  
+import Base from 'routes/Base';
+
+class Page extends Base {  
 
   constructor(props) {
     super(props)
@@ -23,16 +25,21 @@ class Page extends React.Component {
     }
   }
 
+  componentDidMount() {
+    console.log('login-componentDidMount')
+    const {dispatch,location} = this.props
+    dispatch({type:'loginModel/isLoggedIn', payload:{ search: location.search }});
+  }
+
   render(){
     const { loginModel } = this.props
 
     return (
       <MainLayout>
+
         {/*top*/}
         <Header rightContent={[
-          <Link key="1" to={{ pathname: '/' }}>
-            <Button type="default" size="small">首页</Button>
-          </Link>,
+            <Button key="1" onClick={this.toPage.bind(this,'/')} type="default" size="small">首页</Button>,
         ]}/>
 
         {this.state.isWeiXinBrowser ? <LoginByWechat/> : <LoginByPhone/>}

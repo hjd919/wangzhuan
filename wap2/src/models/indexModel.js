@@ -1,4 +1,6 @@
 import { getIndexPage } from '../services/indexService';
+import { routerRedux } from 'dva/router';
+import querystring from 'querystring';
 
 export default {
 
@@ -21,6 +23,14 @@ export default {
       const data = yield call(getIndexPage)
       if (data.error_code == 0) {
         yield put({ type: 'getIndexPageSuccess', payload:data.data})
+      }
+    },
+    // 微信登录 重定向
+    *isRedirect({ payload }, { call, put }) {
+      const search = querystring.parse(payload.search.replace('?',''))
+      if(search.redirect){
+        const redirect = decodeURIComponent(search.redirect)
+        yield put(routerRedux.push(redirect))
       }
     },
   },

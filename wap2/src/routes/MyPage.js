@@ -9,22 +9,27 @@ import Header from 'components/MainLayout/Header';
 import MainLayout from 'components/MainLayout/MainLayout';
 import globalStyles from 'styles/globalStyles';
 
-class Page extends React.Component {
+import Base from 'routes/Base';
+
+class Page extends Base {
+	constructor(props) {
+	  	super(props);
+	}
+
   	componentWillMount() {
 	    const {dispatch} = this.props
+	    
 	    // 获取页面数据
-	    dispatch({type:'myModel/getUserinfo'});		
+	    dispatch({type:'myModel/getUserinfo'});
   	}
 
-  render(){
-  	const {userinfo} = this.props.myModel
-  	
-  	return (
+  	render(){
+	  	const {userinfo} = this.props.myModel
+
+	  	return (
       	<MainLayout>
 	        <Header rightContent={[
-	          <Link key="1" to={{ pathname: '/' }}>
-	            <Button type="default" size="small">首页</Button>
-	          </Link>,
+	            <Button key="1" onClick={this.toPage.bind(this, '/')} type="default" size="small">首页</Button>,
 	        ]}/>
 	        <div style={{height:'1px',background:'#D4D6D8'}}></div>
   			<div className="headerWrap">
@@ -62,15 +67,14 @@ class Page extends React.Component {
   			</div>
 			<div className="gap"></div>
 		 	<List className="my-list">
-		        <Item arrow="horizontal">
-			        <Link to="/help">
+		        <Item arrow="horizontal" onClick={this.toPage.bind(this, "/help")}>
 			          使用帮助
-			        </Link>
 		        </Item>
-		        <Item arrow="horizontal">
-			        <Link to="/feedback">
+		        <Item arrow="horizontal" onClick={this.toPage.bind(this, "/feedback")}>
 			          反馈建议
-			        </Link>
+		        </Item>
+		        <Item arrow="horizontal" onClick={this.toPage.bind(this, "/setting")}>
+			          设置
 		        </Item>
 		    </List>
 	    	<style jsx>{`
@@ -189,8 +193,7 @@ class Page extends React.Component {
 			    text-overflow: ellipsis;
 	    	  }
 	    	`}</style>
-  		</MainLayout>
-  	)
-  }
+  		</MainLayout>)
+  	}
 }
 export default connect(({myModel}) => ({myModel}))(Page);

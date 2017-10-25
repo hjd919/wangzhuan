@@ -10,7 +10,9 @@ import Header from 'components/MainLayout/Header';
 import MainLayout from 'components/MainLayout/MainLayout';
 import globalStyles from 'styles/globalStyles';
 
-class Page extends React.Component {
+import Base from 'routes/Base';
+
+class Page extends Base {
   submit = () => {
   	const {form, dispatch} = this.props
     form.validateFields((error, value) => {
@@ -22,11 +24,9 @@ class Page extends React.Component {
   	return (
       	<MainLayout>
 	        <Header 
-	        leftContent={<Link key="1" to={{ pathname: '/my' }}>返回</Link>}
+	        leftContent={<div onClick={this.toPage.bind(this,'/my')}>返回</div>}
 	        rightContent={[
-	          <Link key="1" to={{ pathname: '/' }}>
-	            <Button type="default" size="small">首页</Button>
-	          </Link>,
+	          <Button key="1" onClick={this.toPage.bind(this,'/')} type="default" size="small">首页</Button>,
 	        ]}/>
 	       	{/*手风琴*/}
 	        <List renderHeader={() => '意见反馈'}>

@@ -17,7 +17,8 @@
             "services": "services",
             "models": "models",
             "utils": "utils",
-            "configs": "configs"
+            "configs": "configs",
+            "routes": "routes"
           }
         }],
         "transform-runtime"
@@ -38,7 +39,8 @@
             "services": "services",
             "models": "models",
             "utils": "utils",
-            "configs": "configs"
+            "configs": "configs",
+            "routes": "routes"
           }
         }],
         "transform-runtime"

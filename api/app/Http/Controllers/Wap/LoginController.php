@@ -70,7 +70,8 @@ class LoginController extends Controller
         $res             = $user->save();
         // Log::info('登录-保存token:' . var_export($res, true));
 
-        $redirect_url = 'http://slsw.yz210.com?api_token=' . $token;
+        $redirect     = urlencode('/login?api_token=' . $token);
+        $redirect_url = 'http://slsw.yz210.com?redirect=' . $redirect;
         // Log::info('登录-跳转地址:' . $redirect_url);
         // $token = JWTAuth::fromUser($user);
 
