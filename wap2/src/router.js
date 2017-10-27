@@ -59,6 +59,15 @@ function RouterConfig({ history, app }) {
     component: () => import('./routes/SettingPage'),
   });
 
+  // 引导
+  const GuidePage = dynamic({
+    app,
+    models: () => [
+      import('./models/guideModel'),
+    ],
+    component: () => import('./routes/GuidePage'),
+  });
+
   return (
     <Router history={history}>
       <Switch>
@@ -68,6 +77,7 @@ function RouterConfig({ history, app }) {
         <Route path="/help" component={HelpPage} />
         <Route path="/feedback" component={FeedbackPage} />
         <Route path="/setting" component={SettingPage} />
+        <Route path="/guide" component={GuidePage} />
         <Redirect to="/" />
       </Switch>
     </Router>

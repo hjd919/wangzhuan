@@ -9,5 +9,8 @@ export default {
 	    } else {
 	        return false;
 	    }
+	},
+	getIdfa: () => {
+		return 'abcd'
 	}
 } 
