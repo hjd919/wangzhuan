@@ -1,10 +1,10 @@
-import { Button, NavBar } from 'antd-mobile';
+import { NavBar } from 'antd-mobile';
 import React from 'react';
 
 function Header({rightContent,leftContent}) {
-	if(!leftContent){
-		leftContent = <span style={{fontSize: "18px",color: '#ef3a3a'}}>万读</span>
-	}
+  if(!leftContent){
+    leftContent = <span style={{fontSize: "18px",color: '#ef3a3a'}}>万读</span>
+  }
   return (
     <NavBar 
       mode="light"

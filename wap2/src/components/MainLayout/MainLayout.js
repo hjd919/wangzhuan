@@ -1,9 +1,12 @@
 import React from 'react';
 
+import Footer from './Footer';
+
 function MainLayout({ children, location }) {
   return (
     <div className="normal">
       {children}
+      <Footer/>
       <style jsx>{`
         .normal {
           display: flex;
