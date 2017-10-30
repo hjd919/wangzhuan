@@ -14,6 +14,6 @@ export default {
 		return 'abcd'
 	},
 	formatToPrice: (amount) => {
-		return Number(amount).toFixed(2);
+		return Number(amount/100).toFixed(2);
 	},
 } 
