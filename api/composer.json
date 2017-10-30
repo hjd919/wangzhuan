@@ -11,7 +11,8 @@
         "laravel/socialite": "^3.0",
         "socialiteproviders/weixin": "^4.0",
         "socialiteproviders/weibo": "^3.0",
-        "xiaosier/libweibo": "dev-master"
+        "xiaosier/libweibo": "dev-master",
+        "illuminate/redis": "^5.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

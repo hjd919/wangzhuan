@@ -23,6 +23,7 @@ $router->group(['middleware' => [], 'namespace' => 'Wap', 'prefix' => 'wap'], fu
 
     $router->group(['middleware' => ['auth']], function () use ($router) {
         $router->get('/user/getUserinfo', 'UserController@getUserinfo');
+        $router->get('/task/getTaskApps', 'TaskController@getTaskApps');
         $router->post('/feedback/submit', 'IndexController@submitFeedback');
     });
 });

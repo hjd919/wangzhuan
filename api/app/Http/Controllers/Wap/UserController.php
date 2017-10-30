@@ -14,8 +14,8 @@ class UserController extends Controller
         User $userModel,
         Request $request
     ) {
-        $userinfo = Auth::user();
+        $userInfo = Auth::user();
 
-        Util::die_json(compact('userinfo'));
+        Util::die_json(compact('userInfo'));
     }
 }

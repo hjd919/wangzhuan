@@ -2,16 +2,19 @@ import { NavBar } from 'antd-mobile';
 import React from 'react';
 
 function Header({rightContent,leftContent}) {
-  if(!leftContent){
-    leftContent = <span style={{fontSize: "18px",color: '#ef3a3a'}}>万读</span>
-  }
+
   return (
-    <NavBar 
-      mode="light"
-      leftContent={leftContent}
-      iconName={<img src="https://img.wandu.cn/novel/icon/20170808/181854_5989900ee6abc.png" style={{width:28,height:28}} alt="万读"/>}
-      rightContent={rightContent}
-    ></NavBar>
+    <header className="aui-bar aui-bar-nav v5-header">
+      <div className="aui-title v5-title">试玩赚赚</div>
+      <style jsx>{`
+.v5-header{
+  background: #2a2a2a;
+}
+.v5-title{
+  font-size: 17px;  
+}
+      `}</style>
+    </header>
   );
 }
 export default Header;

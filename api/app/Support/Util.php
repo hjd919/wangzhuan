@@ -49,4 +49,19 @@ class Util
             }
         }
     }
+
+    // 所有的缓存key
+    public static function cacheKey($type, $params)
+    {
+        extract($params);
+        switch ($type) {
+            case 'doing_app_id':
+                return "doing:app_id:u_{$user_id}";
+                break;
+
+            default:
+                # code...
+                break;
+        }
+    }
 }

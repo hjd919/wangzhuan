@@ -1,119 +1,94 @@
-import { Button, Carousel, Flex, NavBar } from 'antd-mobile';
-import { Link } from 'dva/router';
 import { connect } from 'dva';
 import React from 'react';
 
-import MainLayout from 'components/MainLayout/MainLayout';
-import globalStyles from 'styles/globalStyles';
-import indexStyles from 'styles/indexStyles';
-import util from 'utils/util';
-
 import Base from 'routes/Base';
+import MainLayout from 'components/MainLayout/MainLayout';
 
 class Page extends Base {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      initialHeight: null,
-      isWeiXinBrowser: util.isWeiXinBrowser(navigator.userAgent)
-    };
-  }
 
   componentDidMount() {
     const {dispatch, location} = this.props
     
     // 获取页面数据
-    dispatch({type:'indexModel/getIndexPage'});
+    dispatch({type:'userModel/getUserinfo'}); //用户信息
+    dispatch({type:'taskModel/getTaskApps'}); //列表信息
 
     // 判断是否需要重定向
     dispatch({type:'indexModel/isRedirect', payload:{search: location.search}});
   }
 
   render(){
-    const hProp = this.state.initialHeight ? { height: this.state.initialHeight,width: '100%' } : {};
-
-    const {channels, menus, carousels} = this.props.indexModel
-    const {isLoggedIn} = this.props.loginModel
-    const {isWeiXinBrowser} = this.state
-    // 导航条右边按钮组
-    let rightContent
-    if (isLoggedIn) {
-      rightContent = [<Button key="1" type="default" size="small" onClick={this.toPage.bind(this,'/my')}>我的</Button>]
-    } else{
-      // 没有登录
-      if(!isWeiXinBrowser) {
-        rightContent = [
-          <Button key="1" type="default" onClick={this.toPage.bind(this, '/register')} size="small">注册</Button>,
-          <Button key="2" type="default" onClick={this.toPage.bind(this, '/login')} size="small">登录</Button>
-        ]
-      }
-    }
+    const {userInfo} = this.props.userModel
+    const {taskApps} = this.props.taskModel
 
     return (
       <MainLayout>
-        {/*top*/}
-        <NavBar 
-          mode="light"
-          leftContent={<span style={{fontSize: "18px",color: '#ef3a3a'}}>万读</span>}
-          iconName={<img src="https://img.wandu.cn/novel/icon/20170808/181854_5989900ee6abc.png" style={{width:28,height:28}} alt="万读"/>}
-          rightContent={rightContent}
-        ></NavBar>
-        {/*菜单栏*/}
-        <Flex className="nav">
-          {
-            channels.map((row,key) => {
-              return (
-                <Flex.Item className="nav-item" key={key}>
-                <Link to={row.href ? row.href : `/channel/${row.id}`} className="nav-a">{row.channel_name}</Link>
-                </Flex.Item>
-                )
-            })
-          }
-        </Flex>
-        {/*轮播图*/}
-        <Carousel
-          className="my-carousel"
-          autoplay={false}
-          infinite
-          selectedIndex={1}
-          swipeSpeed={35}
-          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-          afterChange={index => console.log('slide to', index)}
-        >
-          {carousels.map((row,key) => (
-            <a href={row.href} key={key}>
-              <img
-                src={row.image}
-                alt={key}
-              />
-            </a>
-          ))}
-        </Carousel>
-        {/*功能列表*/}
-        <Flex className="func-list">
-          {
-            menus.map((row,key) => {
-              return (
-              <Flex.Item key={key}>
-                  <a className="" href={row.href}>
-                    <p className="func-p">
-                      <img className="func-img" src={row.icon}/>
-                    </p>
-                    <p className="func-p">{row.menu_name}</p>
-                  </a>
-              </Flex.Item>
-              )            
-            })
-          }
-        </Flex>
-        <style jsx>{indexStyles}</style>
-        <style jsx global>{globalStyles}</style>
+         <div className="v5-index-container1" style={{"position": "relative"}}> 
+          <div className="v5-fontsize11 v5-pa-lr-25 ">
+           账户余额(元)
+          </div> 
+          <div className="v5-clearfix v5-pa-lr-25">
+           <div className="aui-col-xs-6 v5-fontsize30">
+            {userInfo.balance}&nbsp;
+           </div> 
+           <a href="/Cash/index.html">
+            <div className="aui-col-xs-6 v5-fontsize16 ">
+             <div className="v5-quxian-btn">
+              <div>
+               提现
+              </div>
+             </div>
+            </div></a>
+          </div> 
+          <div className="v5-clearfix v5-op-container">
+           <div className="aui-col-xs-6">
+            <span className="v5-fontsize11 ">今日收入(元)</span>
+            <span className="v5-fontsize16 pdl7 bdr1 to-down-2">{userInfo.today_income}</span>
+           </div> 
+           <div className="aui-col-xs-6">
+            <span className="v5-fontsize11 ">累计收入(元)</span>
+            <span className="v5-fontsize16 pdl7 bdr1 to-down-2">{userInfo.total_income}</span>
+           </div>
+          </div>
+         </div> 
+
+          <div className="v5-card v5-clearfix">
+            {/*
+           <div className="v5-card-header">
+            <span className="tasking"></span>
+            <span>投放中，总计 5.76 元</span>
+           </div> 
+           */}
+           <div className="card-list-container">
+            {
+              taskApps.now_apps.map((row,key) => {
+                return (
+                  <div className="card-item v5-clearfix" key={key}>
+                   <div className="aui-col-xs-3 task-ico">
+                    <img src={row.icon} />
+                   </div> 
+                   <div className="aui-col-xs-6 task-item-center">
+                    <p className="task-name">{row.title}</p> 
+                    <div>
+                     <span className="tag tag-pink">剩余{row.remain_num}份</span>
+                    </div>
+                   </div> 
+                   <div className="aui-col-xs-3 task-price task-item-right aui-text-center">
+                    <span className="aui-font-size-11">+</span>
+                    <span className="aui-font-size-22">{row.price_user}</span>
+                    <span className="aui-font-size-11">元</span>
+                   </div>
+                  </div>)
+              })
+            }
+           </div>
+          </div>
+
       </MainLayout>
     );
   }
 }
 
 
-export default connect(({indexModel,loginModel}) => ({indexModel,loginModel}))(Page);
+export default connect(({userModel,taskModel}) => ({userModel,taskModel}))(Page);
 

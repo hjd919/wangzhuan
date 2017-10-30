@@ -27,18 +27,16 @@ export default {
         isLoggedIn = localStorage.isLoggedIn = true
         api_token = localStorage.api_token = search.api_token  
       }else{
-        console.log('1111')
         if(!localStorage.isLoggedIn){
-        console.log('222')
           // 如果本地也没有token，则判断为没登录
           isLoggedIn = false
           api_token = ''
         }else{
-        console.log('333')
           isLoggedIn = localStorage.isLoggedIn
           api_token = localStorage.api_token
         }  
       }
+      console.log(isLoggedIn,'---',api_token)
       yield put({ type: 'isLoggedInSuccess', payload:{isLoggedIn, api_token}})
     },
   },
@@ -55,6 +53,7 @@ export default {
       return { ...state, isLoggedIn: true, ...action.payload };
     },
     isLoggedInSuccess(state, action) {
+      console.log(state,'---',action.payload)
       return { ...state, ...action.payload }
     },
   },

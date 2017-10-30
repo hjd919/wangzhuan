@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
+    // 资讯
     public function get(
         Request $request,
         Menu $menuModel,

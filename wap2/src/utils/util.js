@@ -12,5 +12,8 @@ export default {
 	},
 	getIdfa: () => {
 		return 'abcd'
-	}
+	},
+	formatToPrice: (amount) => {
+		return Number(amount).toFixed(2);
+	},
 } 

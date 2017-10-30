@@ -1,11 +1,17 @@
 import React from 'react';
 
+import globalStyles from 'styles/globalStyles';
+
 import Footer from './Footer';
+import Header from './Header';
 
 function MainLayout({ children, location }) {
   return (
     <div className="normal">
-      {children}
+      <Header/>
+        <div className="aui-content" style={{ marginBottom: '50px'}}> 
+        {children}
+        </div>
       <Footer/>
       <style jsx>{`
         .normal {
@@ -14,6 +20,7 @@ function MainLayout({ children, location }) {
           height: 100%;
         }
       `}</style>
+      <style jsx global>{globalStyles}</style>
     </div>
   );
 }

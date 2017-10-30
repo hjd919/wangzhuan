@@ -26,7 +26,6 @@ class Page extends Base {
   }
 
   componentDidMount() {
-    console.log('login-componentDidMount')
     const {dispatch,location} = this.props
     dispatch({type:'loginModel/isLoggedIn', payload:{ search: location.search }});
   }
@@ -36,11 +35,6 @@ class Page extends Base {
 
     return (
       <MainLayout>
-
-        {/*top*/}
-        <Header rightContent={[
-            <Button key="1" onClick={this.toPage.bind(this,'/')} type="default" size="small">首页</Button>,
-        ]}/>
 
         {this.state.isWeiXinBrowser ? <LoginByWechat/> : <LoginByPhone/>}
 

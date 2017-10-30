@@ -7,8 +7,8 @@ function RouterConfig({ history, app }) {
   const IndexPage = dynamic({
     app,
     models: () => [
-      import('./models/userModel'),
-      import('./models/taskModel'),
+      import('./models/indexModel'),
+      import('./models/loginModel'),
     ],
     component: () => import('./routes/IndexPage'),
   });

@@ -91,12 +91,12 @@ export default function request(url, options={}, isAuth=false) {
       .then(data => data)
       .catch(err => {
 
-        if(err.response.status == 401){
-          // 未授权登录
-          Toast.fail('请先登录再访问', 1, ()=>{
-            location.href="/login"
-          });
-        }
+        // if(err.response.status == 401){
+        //   // 未授权登录
+        //   Toast.fail('请先登录再访问', 1, ()=>{
+        //     location.href="/login"
+        //   });
+        // }
 
         return false
       });

@@ -8,15 +8,14 @@ function Footer(props) {
       <p className="link">
           <Link className="link_a" to="/">首页</Link> 
           <span className="cutoff_line"></span>
-          <Link className="link_a" to="/feedback">客服</Link> 
-          <br/>
-              <span>客服qq：</span>
-              <span>297538600</span>
+          <span className="link_a" to="/feedback">客服qq:297538600</span> 
       </p>
       <style jsx>{`
         .footer {
+          position:fixed;
+          bottom:0;
           width: 100%;
-          height: 70px;
+          height: 40px;
           font-size: 16px;
           color: #333;
           text-align: center;
@@ -25,7 +24,7 @@ function Footer(props) {
         .link{
           width: 266px;
           margin: 0 auto 0;
-          padding-top: 20px;
+          padding-top: 10px;
           color: #333;
           font-size: 14px; 
         }
